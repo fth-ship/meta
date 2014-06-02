@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+  .container
+    .row
+      .col-md-6.col-md-push-3
+        h2 Novo questionario
+        hr
+
+    form(action='/form/new', method='post').col-md-6.col-md-push-3
+      .form-group
+        label(for='title') Titulo do formulario
+        input.form-control(type='text', name='title', placeholder='Titulo do formulario...')
+      hr
+
+      .form-group
+        label(for='question[]') Pergunta 
+        input.form-control(type='text', name='question[]', placeholder='Titulo...')
+      
+      hr
+      .form-group
+        button.btn.btn-primary(type='submit') Salvar
+        button.btn.btn-default.add-question.pull-right(type='button') +

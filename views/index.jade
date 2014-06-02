@@ -1,5 +1,21 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  .row
+    .container
+      table.table.table-striped
+        thead
+          tr
+            th Titulo
+            th criado em
+            th
+            th
+
+        tbody
+          each form in forms
+            tr
+              td: a(href='/form/#{form._id}') #{form.title}
+              td #{form.created_at}
+              td
+                | <a href='/form/edit/#{form._id}'>editar</a> | 
+                | <a href='/form/answers/#{form._id}'>ver respostas</a>
