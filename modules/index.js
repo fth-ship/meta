@@ -1,0 +1,1 @@
+exports.timestamp = require('./timestamp');

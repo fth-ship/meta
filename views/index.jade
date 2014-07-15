@@ -12,10 +12,9 @@ block content
             th
 
         tbody
-          each form in forms
+          each question in questions
             tr
-              td: a(href='/form/#{form._id}') #{form.title}
-              td #{form.created_at}
+              td: a(href='/form/#{question._id}') #{question.body}
+              td #{question.created_at}
               td
-                | <a href='/form/edit/#{form._id}'>editar</a> | 
-                | <a href='/form/answers/#{form._id}'>ver respostas</a>
+                | <a href='/form/answers/#{question._id}'>respostas</a>

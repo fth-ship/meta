@@ -1,12 +1,23 @@
 function listFormsHandler(req, res, next) {
-  var forms = res.locals.forms = [];
+  var Question = models.Question;
+  res.locals.questions = [];
 
-  forms.push({
-    _id: '1234567',
-    title: 'Mock #1',
-    created_at: Date.now()
-  });
-
-  next();
+  function findHandler(err, result) {
+    debug('find handler');
+    debug(util.inspect(err));
+    if (!err) {
+      debug(util.inspect(result));
+      res.locals.questions = result;
+      next();
+    } else {
+      next(err);
+    }
+  }
+  Question
+    .find({})
+    .sort({
+      updated_at: -1
+    })
+    .exec(findHandler);
 }
 module.exports = listFormsHandler;
