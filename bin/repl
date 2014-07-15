@@ -5,17 +5,19 @@ var app = require('../app');
 var env = (process.env.NODE_ENV || 'development');
 var replService = null;
 var sep = new Array(30).join('=');
+var line = 1;
 
 console.log(sep);
-console.log('Node version: %s', process.versions.node);
-console.log('V8: %s', process.versions.v8);
+console.log(' Node version: %s', process.versions.node);
+console.log(' V8: %s', process.versions.v8);
 console.log(sep);
 console.log();
 
 replService =
   repl
     .start({
-      prompt: pkg.name + ' (' + env + ') > ',
+      prompt: ' ' + pkg.name + ' (' + env + ') ~> ',
+      useColors: true,
     });
 
 replService.context.app = app;

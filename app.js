@@ -24,7 +24,9 @@ mongoose.connect('localhost', 'meta_' + process.env.NODE_ENV || 'development');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 // components exposition
-app.set('debug');
+app.set('util', util);
+app.set('debug', debug);
+app.set('mongoose', mongoose);
 app.set('modules', modules);
 app.set('models', models);
 app.set('middlewares', middlewares);
