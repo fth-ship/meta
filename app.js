@@ -4,7 +4,10 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+// components
+var util = global.util = require('util');
+var debug = global.debug = require('debug')('meta'); 
+var mongoose = require('mongoose');
 var modules = global.modules = require('./modules');
 var models = global.models = require('./models');
 var middlewares = global.middlewares = require('./middlewares');
@@ -18,7 +21,14 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-
+// components exposition
+app.set('debug');
+app.set('modules', modules);
+app.set('models', models);
+app.set('middlewares', middlewares);
+app.set('controllers', controllers);
+app.set('config', config);
+// middlewares setup
 app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -59,6 +69,5 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
-
 
 module.exports = app;

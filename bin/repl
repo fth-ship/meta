@@ -1,0 +1,29 @@
+#!/usr/bin/env node
+var repl = require('repl');
+var pkg = require('../package');
+var app = require('../app');
+var env = (process.env.NODE_ENV || 'development');
+var replService = null;
+var sep = new Array(30).join('=');
+
+console.log(sep);
+console.log('Node version: %s', process.versions.node);
+console.log('V8: %s', process.versions.v8);
+console.log(sep);
+console.log();
+
+replService =
+  repl
+    .start({
+      prompt: pkg.name + ' (' + env + ') > ',
+    });
+
+replService.context.app = app;
+replService.context.util = app.get('util');
+replService.context.debug = app.get('debug');
+replService.context.mongoose = app.get('mongoose');
+replService.context.config = app.get('config');
+replService.context.modules = app.get('modules');
+replService.context.models = app.get('models');
+replService.context.middlewares = app.get('middlewares');
+replService.context.controllers = app.get('controllers');
