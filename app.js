@@ -18,6 +18,8 @@ var routes = require('./routes/index');
 
 var app = express();
 
+mongoose.connect('localhost', 'meta_' + process.env.NODE_ENV || 'development');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
