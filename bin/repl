@@ -5,6 +5,11 @@ var app = require('../app');
 var env = (process.env.NODE_ENV || 'development');
 var replService = null;
 var sep = new Array(30).join('=');
+var line = 1;
+
+function promptFormat() { 
+  return ' ' + pkg.name + ' (' + env + ') [' + line + '] ~> '; 
+}
 
 console.log(sep);
 console.log(' Node version: %s', process.versions.node);
@@ -15,9 +20,19 @@ console.log();
 replService =
   repl
     .start({
-      prompt: ' ' + pkg.name + ' (' + env + ') ~> ',
+      prompt: promptFormat(),
       useColors: true,
+      input: process.stdin,
+      output: process.stdout,
     });
+
+function onDataHandler(data) {
+  if (data.toString().charCodeAt(0) === 13) {
+    line += 1;
+    replService.prompt = promptFormat();
+  }
+}
+process.stdin.on('data', onDataHandler);
 
 replService.context.app = app;
 replService.context.util = app.get('util');
